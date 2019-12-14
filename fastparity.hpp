@@ -110,7 +110,7 @@ FASTPARITY_MAYBE_CONSTEXPR inline int fastparity32(uint32_t x) {
     if(__builtin_constant_p(__builtin_popcount(x)<=1)) return x ? 1 : 0;
     if(__builtin_constant_p(x <= 0xFFFF) && x <= 0xFFFF) return fastparity16((uint16_t)x);
     #ifdef FASTPARITY_SHIFT16_OVER32
-    if(__builtin_constant_p((x & 0xFFFF0000) == x)) return fastparity16((uint16_t)(x>>16));
+    if(__builtin_constant_p((x & 0xFFFF0000) == x) && (x & 0xFFFF0000) == x) return fastparity16((uint16_t)(x>>16));
     #endif
 
     #ifndef FASTPARITY_NOASM
