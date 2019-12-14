@@ -52,7 +52,6 @@ inline int fastparity32_impl(uint32_t x) {
 inline int fastparity16_impl(uint16_t x) {
     #if defined FASTPARITY_x86_any
     int asmout;
-    uint32_t clobber;
     uint32_t x2 = x;
     asm(R"(
         {xorb %h[x], %b[x]|xor %b[x],%h[x]}
@@ -69,7 +68,6 @@ inline int fastparity16_impl(uint16_t x) {
 inline int fastparity8_impl(uint8_t x) {
     #if defined FASTPARITY_x86_any
     int asmout;
-    uint32_t clobber;
     uint32_t x2 = x;
     asm(R"(
         {orb $0, %b[x]|or %b[x],0}
